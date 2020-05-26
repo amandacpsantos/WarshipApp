@@ -1,68 +1,19 @@
-<apex:page standardController="Warship__c" extensions="ManagingWarshipController">
-    <apex:form>
+<apex:page>
+    <apex:includeLightning />
 
-        <!-- Resource -->            
-        <apex:pageBlock title="Resources" tabStyle="Resource__c">
-            
-            <!-- Table with all resources -->
-            <apex:pageBlockTable var="resource" value="{!warship.Resources__r}">
-                <apex:column value="{!resource.Name}"/>
-                <apex:column value="{!resource.Quantity__c}"/>
-                <apex:column value="{!resource.Utilization__c}"/>
-            </apex:pageBlockTable>
+    <div id="lightning" />
 
-            <!-- Table with fields to add resource -->
-            <apex:pageBlockTable var="resource" value="{!newResources}" rendered="{!newResources.size > 0}">
-                <apex:column headerValue="Name">
-                    <apex:inputField value="{!resource.Name}"/>
-                </apex:column>
-                <apex:column headerValue="Quantity">
-                    <apex:inputField value="{!resource.Quantity__c}"/>
-                </apex:column>
-                <apex:column headerValue="Utilization">
-                    <apex:inputField value="{!resource.Utilization__c}"/>
-                </apex:column>
-            </apex:pageBlockTable>
+    <script>
+        $Lightning.use("c:ManagingWarshipApp", function() {
+          $Lightning.createComponent("c:ManagingWarshipComponent",
+              {label : ''},
+              "lightning",
+              function(cmp) {
+                //console.log("button was created");
+                // do some stuff
+              }
+          );
+        });
+    </script>
 
-            <!-- Buttons -->
-            <apex:commandButton action="{!addResource}" value="Add New" immediate="true"/>
-            <apex:commandButton action="{!saveResources}" value="Save All" rendered="{!newResources.size > 0}"/>
-
-        </apex:pageBlock>
-
-
-        <!-- Supply -->
-        <apex:pageBlock title="Supplies" tabStyle="Supply__c">
-
-            <!-- Table with all resources -->
-            <apex:pageBlockTable var="supply" value="{!warship.Supplies__r}">
-                <apex:column value="{!supply.Name}"></apex:column>
-                <apex:column value="{!supply.Quantity__c}"></apex:column>
-                <apex:column value="{!supply.Unit_Cost__c}"></apex:column>
-                <apex:column value="{!supply.Total_Cost__c}"></apex:column>
-            </apex:pageBlockTable>
-
-            <!-- Table with fields to add resource -->
-            <apex:pageBlockTable var="supply" value="{!newSupplies}" rendered="{!newSupplies.size > 0}">
-                <apex:column headerValue="Name">
-                    <apex:inputField value="{!supply.Name}"/>
-                </apex:column>
-                <apex:column headerValue="Quantity">
-                    <apex:inputField value="{!supply.Quantity__c}"/>
-                </apex:column>
-                <apex:column headerValue="Unit Cost">
-                    <apex:inputField value="{!supply.Unit_Cost__c}"/>
-                </apex:column>
-                <apex:column headerValue="Total Cost">
-                    <apex:inputField value="{!supply.Total_Cost__c}"/>
-                </apex:column>
-            </apex:pageBlockTable>
-
-            <!-- Buttons -->
-            <apex:commandButton action="{!addSupply}" value="Add New" immediate="true"/>
-            <apex:commandButton action="{!saveSupplies}" value="Save All" rendered="{!newSupplies.size > 0}"/>
-
-        </apex:pageBlock>
-
-    </apex:form>
 </apex:page>
